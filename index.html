@@ -66,7 +66,7 @@ footer{font-size:12.5px;color:var(--ink-3)}
 @media (max-width:900px){
   header{grid-template-columns:minmax(0,1fr)}
   .facts{grid-template-columns:repeat(3,minmax(0,1fr))}
-  #fAssembly{height:880px} #fLeg{height:1400px}
+  #fAssembly{height:880px}
 }
 @media (max-width:520px){ .facts{grid-template-columns:minmax(0,1fr)} .next{grid-template-columns:minmax(0,1fr)} }
 </style>
@@ -87,12 +87,23 @@ footer{font-size:12.5px;color:var(--ink-3)}
   </header>
 
   <nav class="tabs" role="tablist" aria-label="Views">
-    <button class="tab" role="tab" id="tVideo" aria-controls="pVideo" aria-selected="true" data-key="video"><span class="n">1</span>Printed dock · video</button>
-    <button class="tab" role="tab" id="tAssembly" aria-controls="pAssembly" aria-selected="false" data-key="assembly"><span class="n">2</span>Latch assembly · animation</button>
+    <button class="tab" role="tab" id="tAssembly" aria-controls="pAssembly" aria-selected="true" data-key="assembly"><span class="n">1</span>Latch assembly · animation</button>
+    <button class="tab" role="tab" id="tVideo" aria-controls="pVideo" aria-selected="false" data-key="video"><span class="n">2</span>Printed dock · video</button>
     <button class="tab" role="tab" id="tLeg" aria-controls="pLeg" aria-selected="false" data-key="leg"><span class="n">3</span>Leg CAD V70 · 3D</button>
   </nav>
 
-  <section class="panel" role="tabpanel" id="pVideo" aria-labelledby="tVideo">
+  <section class="panel" role="tabpanel" id="pAssembly" aria-labelledby="tAssembly">
+    <div class="cap">
+      <div>
+        <h2>Latch assembly on the printed dock parts</h2>
+        <p>How the Southco draw latches and keepers go onto the two printed parts, then docking, latching and release, in 9 steps. Press Play, or click a step to jump to it. Drag the model to rotate.</p>
+      </div>
+      <a class="open" href="assembly.html" target="_blank" rel="noopener">Open full page ↗</a>
+    </div>
+    <iframe id="fAssembly" title="Latch assembly animation" data-src="assembly.html?embed" loading="lazy"></iframe>
+  </section>
+
+  <section class="panel" role="tabpanel" id="pVideo" aria-labelledby="tVideo" hidden>
     <div class="cap">
       <div>
         <h2>First PLA print of the quick-release dock</h2>
@@ -106,17 +117,6 @@ footer{font-size:12.5px;color:var(--ink-3)}
         <a href="media/print_test_v70.mp4">Download the video (MP4)</a>
       </video>
     </div>
-  </section>
-
-  <section class="panel" role="tabpanel" id="pAssembly" aria-labelledby="tAssembly" hidden>
-    <div class="cap">
-      <div>
-        <h2>Latch assembly on the printed dock parts</h2>
-        <p>How the Southco draw latches and keepers go onto the two printed parts, then docking, latching and release, in 9 steps. Press Play, or click a step to jump to it. Drag the model to rotate.</p>
-      </div>
-      <a class="open" href="assembly.html" target="_blank" rel="noopener">Open full page ↗</a>
-    </div>
-    <iframe id="fAssembly" title="Latch assembly animation" data-src="assembly.html?embed" loading="lazy"></iframe>
   </section>
 
   <section class="panel" role="tabpanel" id="pLeg" aria-labelledby="tLeg" hidden>
@@ -157,8 +157,13 @@ footer{font-size:12.5px;color:var(--ink-3)}
     const j = e.key === 'ArrowRight' ? (i + 1) % tabs.length : e.key === 'ArrowLeft' ? (i + tabs.length - 1) % tabs.length : -1;
     if (j >= 0) { e.preventDefault(); tabs[j].focus(); show(tabs[j].dataset.key, true); }
   });
+  // A narrow embedded view reports its natural height (0 = use the default frame height).
+  window.addEventListener('message', e => {
+    const h = e.data && e.data.icosEmbedHeight; if (typeof h !== 'number' || !isFinite(h)) return;
+    document.querySelectorAll('iframe').forEach(f => { if (f.contentWindow === e.source) f.style.height = h > 0 ? Math.min(h, 20000) + 'px' : ''; });
+  });
   const start = (location.hash || '').slice(1);
-  show(['video', 'assembly', 'leg'].includes(start) ? start : 'video', false);
+  show(['assembly', 'video', 'leg'].includes(start) ? start : 'assembly', false);
 })();
 </script>
 </body>
