@@ -1,0 +1,165 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>ICOS Weekly Update</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 32 32%27%3E%3Cpath d=%27M16 2 29 9.5v13L16 30 3 22.5v-13z%27 fill=%27%230f7a8c%27/%3E%3Cpath d=%27M16 9l7 4v7l-7 4-7-4v-7z%27 fill=%27%23fff%27/%3E%3C/svg%3E">
+<meta name="description" content="ICOS modular legged robot: leg V70 CAD, dock latch assembly and the first PLA print of the quick-release dock.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+<style>
+:root{
+  --ground:#eef0ec; --panel:#f8f9f6; --ink:#1c2126; --ink-2:#4b5560; --ink-3:#77818b;
+  --line:#cfd5d2; --line-2:#e1e5e1; --accent:#0f7a8c; --accent-ink:#ffffff; --accent-soft:#dcebea;
+  --shadow:0 1px 2px rgba(20,30,40,.05),0 6px 20px rgba(20,30,40,.06);
+  --sans:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){
+  :root{
+    color-scheme:dark;
+    --ground:#15181c; --panel:#1d2126; --ink:#e6e8e3; --ink-2:#a7afb8; --ink-3:#7d8791;
+    --line:#39414a; --line-2:#2a3138; --accent:#3fb4c6; --accent-ink:#0f1417; --accent-soft:#1f3a40;
+    --shadow:0 1px 2px rgba(0,0,0,.3),0 6px 20px rgba(0,0,0,.25);
+  }
+}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html,body{margin:0;background:var(--ground);color:var(--ink)}
+body{font-family:var(--sans);font-size:15px;line-height:1.6;-webkit-text-size-adjust:100%}
+.page{max-width:1440px;margin:0 auto;padding-inline:16px;padding-block:26px 48px;display:flex;flex-direction:column;gap:22px}
+h1,h2,p{margin:0}
+a{color:var(--accent)}
+.eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--accent)}
+header{display:grid;grid-template-columns:minmax(0,1.4fr) minmax(0,1fr);gap:18px 40px;align-items:end;border-bottom:1px solid var(--line);padding-bottom:20px}
+header h1{font-size:clamp(26px,3.4vw,38px);line-height:1.15;font-weight:600;letter-spacing:-.01em;text-wrap:balance;margin-top:6px}
+header .lede{color:var(--ink-2);max-width:66ch;margin-top:10px}
+.facts{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.fact{background:var(--panel);border:1px solid var(--line-2);border-radius:8px;padding:10px 12px}
+.fact b{display:block;font-family:var(--mono);font-size:20px;font-weight:500;font-variant-numeric:tabular-nums}
+.fact span{font-size:12.5px;color:var(--ink-2);line-height:1.35;display:block}
+.tabs{display:flex;flex-wrap:wrap;gap:8px}
+.tab{font:inherit;font-size:14.5px;display:inline-flex;align-items:center;gap:10px;padding:9px 16px 9px 12px;border-radius:999px;border:1px solid var(--line);background:var(--panel);color:var(--ink);cursor:pointer}
+.tab .n{font-family:var(--mono);font-size:12px;width:22px;height:22px;border-radius:50%;display:inline-grid;place-items:center;background:var(--accent-soft);color:var(--accent)}
+.tab:hover{border-color:var(--accent)}
+.tab[aria-selected="true"]{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+.tab[aria-selected="true"] .n{background:var(--accent-ink);color:var(--accent)}
+.tab:focus-visible,.open:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.panel{background:var(--panel);border:1px solid var(--line);border-radius:10px;box-shadow:var(--shadow);overflow:hidden}
+.cap{display:flex;flex-wrap:wrap;align-items:flex-start;justify-content:space-between;gap:10px 24px;padding:16px 20px 14px;border-bottom:1px solid var(--line-2)}
+.cap h2{font-size:19px;font-weight:600;line-height:1.3}
+.cap p{color:var(--ink-2);font-size:14px;max-width:88ch;margin-top:4px}
+.meta{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
+.meta span{font-family:var(--mono);font-size:11.5px;padding:2px 9px;border-radius:999px;background:var(--ground);border:1px solid var(--line-2);white-space:nowrap}
+.open{font-size:13.5px;white-space:nowrap;text-decoration:none;border:1px solid var(--line);border-radius:6px;padding:6px 12px;color:var(--ink);background:var(--ground)}
+.open:hover{border-color:var(--accent);color:var(--accent)}
+.videobox{background:#0e1113;display:grid;place-items:center}
+video{display:block;width:100%;max-height:78vh;aspect-ratio:16/9;background:#0e1113}
+iframe{display:block;width:100%;border:0;background:var(--ground)}
+#fAssembly{height:1010px} #fLeg{height:1080px}
+.next{display:grid;grid-template-columns:auto 1fr;gap:4px 14px;align-items:start;padding:14px 18px;border:1px dashed var(--line);border-radius:10px}
+.next .eyebrow{padding-top:3px}
+.next p{color:var(--ink-2);font-size:14.5px;max-width:110ch}
+footer{font-size:12.5px;color:var(--ink-3)}
+@media (max-width:900px){
+  header{grid-template-columns:minmax(0,1fr)}
+  .facts{grid-template-columns:repeat(3,minmax(0,1fr))}
+  #fAssembly{height:880px} #fLeg{height:1400px}
+}
+@media (max-width:520px){ .facts{grid-template-columns:minmax(0,1fr)} .next{grid-template-columns:minmax(0,1fr)} }
+</style>
+</head>
+<body>
+<div class="page">
+  <header>
+    <div>
+      <p class="eyebrow">ICOS modular legged robot · Weekly update · 24 Sep 2026</p>
+      <h1>Leg V70 and the first printed quick-release dock</h1>
+      <p class="lede">This week the leg moved from GPT’s V69 to V70, which fixes how the parts connect: blocked bolt holes, a latch that could not seat the dock, servos held by no screws, and bolts that ran into a moving part. The quick-release dock was printed in PLA on the Bambu H2D and fits by hand. The three views below are interactive.</p>
+    </div>
+    <div class="facts" aria-label="Key numbers">
+      <div class="fact"><b>0</b><span>collisions over 2197 joint poses (V70, ±90° on all 3 joints)</span></div>
+      <div class="fact"><b>0</b><span>collisions with all 51 fasteners modelled, and with 4 legs on the body</span></div>
+      <div class="fact"><b>2</b><span>dock parts printed in PLA on the Bambu H2D: root block + receiver</span></div>
+    </div>
+  </header>
+
+  <nav class="tabs" role="tablist" aria-label="Views">
+    <button class="tab" role="tab" id="tVideo" aria-controls="pVideo" aria-selected="true" data-key="video"><span class="n">1</span>Printed dock · video</button>
+    <button class="tab" role="tab" id="tAssembly" aria-controls="pAssembly" aria-selected="false" data-key="assembly"><span class="n">2</span>Latch assembly · animation</button>
+    <button class="tab" role="tab" id="tLeg" aria-controls="pLeg" aria-selected="false" data-key="leg"><span class="n">3</span>Leg CAD V70 · 3D</button>
+  </nav>
+
+  <section class="panel" role="tabpanel" id="pVideo" aria-labelledby="tVideo">
+    <div class="cap">
+      <div>
+        <h2>First PLA print of the quick-release dock</h2>
+        <p>The root block (leg side) is placed on the receiver (body side) and seated in its two rear hooks by hand. The metal draw latches are not fitted yet.</p>
+        <div class="meta"><span>Bambu H2D</span><span>PLA, 0.16 mm layers</span><span>root block + tuning receiver</span><span>17 s</span></div>
+      </div>
+    </div>
+    <div class="videobox">
+      <video id="vid" controls muted loop playsinline preload="metadata" poster="media/print_test_v70_poster.jpg">
+        <source src="media/print_test_v70.mp4" type="video/mp4">
+        <a href="media/print_test_v70.mp4">Download the video (MP4)</a>
+      </video>
+    </div>
+  </section>
+
+  <section class="panel" role="tabpanel" id="pAssembly" aria-labelledby="tAssembly" hidden>
+    <div class="cap">
+      <div>
+        <h2>Latch assembly on the printed dock parts</h2>
+        <p>How the Southco draw latches and keepers go onto the two printed parts, then docking, latching and release, in 9 steps. Press Play, or click a step to jump to it. Drag the model to rotate.</p>
+      </div>
+      <a class="open" href="assembly.html" target="_blank" rel="noopener">Open full page ↗</a>
+    </div>
+    <iframe id="fAssembly" title="Latch assembly animation" data-src="assembly.html?embed" loading="lazy"></iframe>
+  </section>
+
+  <section class="panel" role="tabpanel" id="pLeg" aria-labelledby="tLeg" hidden>
+    <div class="cap">
+      <div>
+        <h2>Leg CAD V70 next to GPT’s V69</h2>
+        <p>Click an item in the left column to see what was wrong in V69 and how V70 fixes it; the 3D view jumps to that spot. Use the sliders to move the joints, remove the leg from its dock, cut a section or explode the assembly.</p>
+        <div class="meta"><span>3 × Hiwonder HTD-45H</span><span>12 PLA parts + TPU foot</span><span>417.5 g solid PLA per leg</span><span>0 static overlaps (85 exact pairs)</span></div>
+      </div>
+      <a class="open" href="leg.html" target="_blank" rel="noopener">Open full page ↗</a>
+    </div>
+    <iframe id="fLeg" title="Interactive leg CAD, V70 and V69" data-src="leg.html?embed" loading="lazy"></iframe>
+  </section>
+
+  <aside class="next">
+    <p class="eyebrow">Next</p>
+    <p>Fit the Southco latches when they arrive, then run 30 dock/undock cycles and a pull test. Two follow-up docks are designed and pass the same CAD checks: V71 (stiffer keeper mount, dovetail front lock) and V72 (two printed snap-fit arms instead of the metal latches). Printing and side-by-side tests follow.</p>
+  </aside>
+
+  <footer>Built from the project CAD (leg V70 package and the dock print test). The interactive views run in the browser with three.js; the latch and keeper are drawn from catalogue dimensions, not vendor models.</footer>
+</div>
+<script>
+(function () {
+  const tabs = Array.from(document.querySelectorAll('.tab'));
+  const vid = document.getElementById('vid');
+  function show(key, push) {
+    tabs.forEach(t => {
+      const on = t.dataset.key === key, panel = document.getElementById(t.getAttribute('aria-controls'));
+      t.setAttribute('aria-selected', String(on)); panel.hidden = !on;
+      if (on) { const f = panel.querySelector('iframe[data-src]'); if (f && !f.getAttribute('src')) f.setAttribute('src', f.dataset.src); }
+    });
+    if (key === 'video') { const p = vid.play(); if (p && p.catch) p.catch(() => {}); } else vid.pause();
+    if (push) history.replaceState(null, '', '#' + key);
+  }
+  tabs.forEach(t => t.addEventListener('click', () => show(t.dataset.key, true)));
+  document.querySelector('.tabs').addEventListener('keydown', e => {
+    const i = tabs.indexOf(document.activeElement); if (i < 0) return;
+    const j = e.key === 'ArrowRight' ? (i + 1) % tabs.length : e.key === 'ArrowLeft' ? (i + tabs.length - 1) % tabs.length : -1;
+    if (j >= 0) { e.preventDefault(); tabs[j].focus(); show(tabs[j].dataset.key, true); }
+  });
+  const start = (location.hash || '').slice(1);
+  show(['video', 'assembly', 'leg'].includes(start) ? start : 'video', false);
+})();
+</script>
+</body>
+</html>
