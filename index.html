@@ -75,30 +75,30 @@ footer{font-size:12.5px;color:var(--ink-3)}
 <div class="page">
   <header>
     <div>
-      <p class="eyebrow">ICOS modular legged robot · Weekly update · 24 Sep 2026</p>
-      <h1>Leg V70 and the first printed quick-release dock</h1>
-      <p class="lede">This week the leg moved from GPT’s V69 to V70, which fixes how the parts connect: blocked bolt holes, a latch that could not seat the dock, servos held by no screws, and bolts that ran into a moving part. The quick-release dock was printed in PLA on the Bambu H2D and fits by hand. The three views below are interactive.</p>
+      <p class="eyebrow">ICOS · Weekly update · 24 Sep 2026</p>
+      <h1>Leg V70 and the first printed dock</h1>
+      <p class="lede">V70 fixes how the leg parts fit together. The quick-release dock is printed and fits by hand.</p>
     </div>
     <div class="facts" aria-label="Key numbers">
-      <div class="fact"><b>0</b><span>collisions over 2197 joint poses (V70, ±90° on all 3 joints)</span></div>
-      <div class="fact"><b>0</b><span>collisions with all 51 fasteners modelled, and with 4 legs on the body</span></div>
-      <div class="fact"><b>2</b><span>dock parts printed in PLA on the Bambu H2D: root block + receiver</span></div>
+      <div class="fact"><b>0</b><span>collisions in 2197 joint poses</span></div>
+      <div class="fact"><b>0</b><span>collisions with 51 fasteners and 4 legs</span></div>
+      <div class="fact"><b>2</b><span>dock parts printed in PLA</span></div>
     </div>
   </header>
 
   <nav class="tabs" role="tablist" aria-label="Views">
-    <button class="tab" role="tab" id="tAssembly" aria-controls="pAssembly" aria-selected="true" data-key="assembly"><span class="n">1</span>Latch assembly · animation</button>
-    <button class="tab" role="tab" id="tVideo" aria-controls="pVideo" aria-selected="false" data-key="video"><span class="n">2</span>Printed dock · video</button>
-    <button class="tab" role="tab" id="tLeg" aria-controls="pLeg" aria-selected="false" data-key="leg"><span class="n">3</span>Leg CAD V70 · 3D</button>
+    <button class="tab" role="tab" id="tAssembly" aria-controls="pAssembly" aria-selected="true" data-key="assembly"><span class="n">1</span>Latch assembly</button>
+    <button class="tab" role="tab" id="tVideo" aria-controls="pVideo" aria-selected="false" data-key="video"><span class="n">2</span>Printed dock</button>
+    <button class="tab" role="tab" id="tLeg" aria-controls="pLeg" aria-selected="false" data-key="leg"><span class="n">3</span>Leg CAD</button>
   </nav>
 
   <section class="panel" role="tabpanel" id="pAssembly" aria-labelledby="tAssembly">
     <div class="cap">
       <div>
-        <h2>Latch assembly on the printed dock parts</h2>
-        <p>How the Southco draw latches and keepers go onto the two printed parts, then docking, latching and release, in 9 steps. Press Play, or click a step to jump to it. Drag the model to rotate.</p>
+        <h2>Latch assembly in 9 steps</h2>
+        <p>Press Play, or click a step.</p>
       </div>
-      <a class="open" href="assembly.html" target="_blank" rel="noopener">Open full page ↗</a>
+      <a class="open" href="assembly.html" target="_blank" rel="noopener">Full page ↗</a>
     </div>
     <iframe id="fAssembly" title="Latch assembly animation" data-src="assembly.html?embed" loading="lazy"></iframe>
   </section>
@@ -106,9 +106,8 @@ footer{font-size:12.5px;color:var(--ink-3)}
   <section class="panel" role="tabpanel" id="pVideo" aria-labelledby="tVideo" hidden>
     <div class="cap">
       <div>
-        <h2>First PLA print of the quick-release dock</h2>
-        <p>The root block (leg side) is placed on the receiver (body side) and seated in its two rear hooks by hand. The metal draw latches are not fitted yet.</p>
-        <div class="meta"><span>Bambu H2D</span><span>PLA, 0.16 mm layers</span><span>root block + tuning receiver</span><span>17 s</span></div>
+        <h2>First PLA print of the dock</h2>
+        <p>Seated by hand. The metal latches are not fitted yet.</p>
       </div>
     </div>
     <div class="videobox">
@@ -122,21 +121,19 @@ footer{font-size:12.5px;color:var(--ink-3)}
   <section class="panel" role="tabpanel" id="pLeg" aria-labelledby="tLeg" hidden>
     <div class="cap">
       <div>
-        <h2>Leg CAD V70 next to GPT’s V69</h2>
-        <p>Click an item in the left column to see what was wrong in V69 and how V70 fixes it; the 3D view jumps to that spot. Use the sliders to move the joints, remove the leg from its dock, cut a section or explode the assembly.</p>
-        <div class="meta"><span>3 × Hiwonder HTD-45H</span><span>12 PLA parts + TPU foot</span><span>417.5 g solid PLA per leg</span><span>0 static overlaps (85 exact pairs)</span></div>
+        <h2>Leg V70 next to GPT’s V69</h2>
+        <p>Click an item on the left to see it in 3D.</p>
       </div>
-      <a class="open" href="leg.html" target="_blank" rel="noopener">Open full page ↗</a>
+      <a class="open" href="leg.html" target="_blank" rel="noopener">Full page ↗</a>
     </div>
     <iframe id="fLeg" title="Interactive leg CAD, V70 and V69" data-src="leg.html?embed" loading="lazy"></iframe>
   </section>
 
   <aside class="next">
     <p class="eyebrow">Next</p>
-    <p>Fit the Southco latches when they arrive, then run 30 dock/undock cycles and a pull test. Two follow-up docks are designed and pass the same CAD checks: V71 (stiffer keeper mount, dovetail front lock) and V72 (two printed snap-fit arms instead of the metal latches). Printing and side-by-side tests follow.</p>
+    <p>Fit the latches, then 30 dock cycles and a pull test. Docks V71 and V72 are designed and ready to print.</p>
   </aside>
 
-  <footer>Built from the project CAD (leg V70 package and the dock print test). The interactive views run in the browser with three.js; the latch and keeper are drawn from catalogue dimensions, not vendor models.</footer>
 </div>
 <script>
 (function () {

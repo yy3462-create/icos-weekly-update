@@ -58,7 +58,8 @@ header p{margin:6px 0 0;color:var(--ink-2);max-width:68ch}
 .cap{display:grid;grid-template-columns:auto 1fr;gap:4px 14px;padding:14px 18px 10px;border-top:1px solid var(--line)}
 .cap .no{grid-row:span 2;font-family:var(--mono);font-size:13px;color:var(--accent);font-weight:500;padding-top:3px;min-width:3.2em}
 .cap h2{margin:0;font-size:18px;line-height:1.35;font-weight:700;text-wrap:balance}
-.cap p{margin:0;color:var(--ink-2);max-width:72ch;min-height:3.2em}
+.cap p{margin:0;color:var(--ink-2);max-width:72ch;min-height:1.6em}
+.steps .d:empty{display:none}
 .ctl{display:flex;flex-wrap:wrap;align-items:center;gap:8px 10px;padding:8px 18px 16px}
 .ctl button,.ctl select{font:inherit;font-size:14px;color:var(--ink);background:var(--bg);border:1px solid var(--line);border-radius:6px;padding:6px 12px;cursor:pointer;line-height:1.3}
 .ctl button:hover,.ctl select:hover{border-color:var(--ink-2)}
@@ -95,7 +96,7 @@ header p{margin:6px 0 0;color:var(--ink-2);max-width:68ch}
 <div class="wrap">
   <header>
     <h1>Quick-release dock: latch assembly</h1>
-    <p>How the purchased Southco draw latch <span class="pn">97-30-160-12</span> and keeper <span class="pn">97-37-103-24</span> go onto the two parts printed for the dock test, <span class="pn">A_root_block</span> (leg side) and <span class="pn">B_receiver_TUNING_slots</span> (body side, slotted keeper holes for tuning), and how the leg is latched and released.</p>
+    <p>How the Southco draw latch and keeper go onto the two printed dock parts, and how the leg is latched and released.</p>
   </header>
 
   <section class="stage" aria-label="Assembly animation">
@@ -104,10 +105,10 @@ header p{margin:6px 0 0;color:var(--ink-2);max-width:68ch}
       <div class="legend" aria-hidden="true">
         <span><i style="background:var(--c-a)"></i>A root block</span>
         <span><i style="background:var(--c-b)"></i>B receiver</span>
-        <span><i style="background:var(--c-latch)"></i>Latch / keeper (stainless steel in reality)</span>
+        <span><i style="background:var(--c-latch)"></i>Latch / keeper</span>
         <span><i style="background:var(--c-steel)"></i>M3 screws / nuts</span>
       </div>
-      <div class="hint" id="hint">Drag to rotate · scroll to zoom · Shift-drag to pan</div>
+      <div class="hint" id="hint">Drag to rotate · scroll to zoom</div>
       <div id="tags"></div>
     </div>
     <div class="cap" aria-live="polite">
@@ -146,16 +147,14 @@ header p{margin:6px 0 0;color:var(--ink-2);max-width:68ch}
       </table>
     </div>
     <div class="card">
-      <h3>Assembly notes</h3>
+      <h3>Notes</h3>
       <ul>
-        <li>Tighten the M3 screws hand-tight plus 1/8 turn, no more: PLA crushes.</li>
-        <li>Start with the keeper centred in its slots. If the lever will not close, move the keeper 0.2–0.3 mm toward the latch; if there is no click or the leg rocks, move it the other way.</li>
-        <li>Once it is right, scribe a line on the pedestal along the keeper edge, so any slip shows later.</li>
-        <li>Measure S (latch lower screw centre to keeper upper screw centre). The offset δ = S − 14.7 mm sets the final receiver with round holes.</li>
+        <li>M3 screws: hand-tight plus 1/8 turn. PLA crushes.</li>
+        <li>Lever will not close: move the keeper 0.2–0.3 mm toward the latch. No click: move it away.</li>
       </ul>
     </div>
   </div>
-  <p class="foot">Part shapes come from the CAD used for this print (dock_print_test). The latch and keeper are simplified from the Southco catalogue dimensions (hole pitch 9.5 / 5.5 mm, S = 14.7 mm); the lever and strap motion is schematic, not the vendor mechanism.</p>
+  <p class="foot">Latch and keeper simplified from the Southco catalogue; the lever motion is schematic.</p>
 </div>
 
 <script src="vendor/three.r128.min.js"></script>
@@ -170,24 +169,24 @@ const REDUCE = window.matchMedia && window.matchMedia('(prefers-reduced-motion: 
 
 /* ---------- steps ---------- */
 const STEPS = [
-  {t: 'Meet the two printed parts', d: 'A on top, B below', cam: 'overview', dur: 5,
-   b: 'Top: A, the root block (leg side). Bottom: B, the receiver (body side). The draw latches mount on the tilted pedestals on both sides of A, the keepers on both sides of B. Left and right are identical; the camera follows the right-hand set.'},
-  {t: "Slide the latch nuts into A's pedestal", d: '2 × M3 nuts per side', cam: 'latchNuts', dur: 5,
-   b: 'Two M3 nuts per side slide into the slot on the upper rear face of the pedestal. Pushed home, each one stops in line with its screw hole.'},
-  {t: 'Place the latch on the pedestal', d: 'Lever open, holes over the nuts', cam: 'latch', dur: 4.5,
-   b: 'Open the lever first so the two base holes are exposed. The base plate sits flat on the outer face of the pedestal with its holes over the nuts; the strap end points down, toward B.'},
-  {t: 'Drive two M3×8 screws', d: '2 × M3×8 per side', cam: 'latch', dur: 4.5,
-   b: 'M3×8 button-head screws go in from outside into the nuts: hand-tight plus 1/8 turn. Same on the other side.'},
-  {t: "Keeper nuts into B's pedestal", d: '2 × M3 nuts from the inside', cam: 'keeperNuts', dur: 5,
-   b: "The inner face of each B pedestal has two elongated hex pockets, reachable only while the leg is off. Push the M3 nuts in from the inside and hold them with a finger or a piece of tape."},
-  {t: 'Keeper centred in the slots', d: '2 × M3×6 per side', cam: 'keeper', dur: 5.5,
-   b: "The keeper sits on the outer face of B's pedestal with its raised hook lip at the end away from the latch (pointing down). Start both M3×6 screws, centre the keeper in the slots, then tighten hand-tight."},
-  {t: 'Seat the leg', d: 'Drop 10 mm ahead, push back 10 mm', cam: 'dock', dur: 6.5,
-   b: 'Keep both levers open. Lower A onto the seat 10 mm ahead of its final position, then push it back 10 mm: both ears enter the hooks and the wedge faces close.'},
-  {t: 'Hook the strap, close the lever', d: 'Hook on, press until it clicks', cam: 'latching', dur: 6.5,
-   b: "Hook the end of the strap behind the keeper's lip, then press the lever fully down; it clicks as it passes over centre. Latch both sides."},
-  {t: 'Release', d: 'Open, unhook, slide forward 10 mm, lift', cam: 'dock', dur: 6.5,
-   b: 'Open both levers, unhook the straps, slide A forward 10 mm, then lift it off.'}
+  {t: 'Meet the two printed parts', d: '', cam: 'overview', dur: 5,
+   b: 'A: root block (leg side). B: receiver (body side).'},
+  {t: 'Latch nuts into A', d: '', cam: 'latchNuts', dur: 5,
+   b: 'Two M3 nuts per side slide into the pedestal slot.'},
+  {t: 'Latch onto the pedestal', d: '', cam: 'latch', dur: 4.5,
+   b: 'Lever open, holes over the nuts, strap pointing down.'},
+  {t: 'Two M3×8 screws', d: '', cam: 'latch', dur: 4.5,
+   b: 'Hand-tight plus 1/8 turn. Same on the other side.'},
+  {t: 'Keeper nuts into B', d: '', cam: 'keeperNuts', dur: 5,
+   b: 'Two M3 nuts per side, pushed in from the inside.'},
+  {t: 'Keeper on, centred', d: '', cam: 'keeper', dur: 5.5,
+   b: 'Two M3×6 per side, lip facing down, hand-tight.'},
+  {t: 'Seat the leg', d: '', cam: 'dock', dur: 6.5,
+   b: 'Set A down 10 mm ahead, then push it back into the hooks.'},
+  {t: 'Hook and close', d: '', cam: 'latching', dur: 6.5,
+   b: 'Hook the strap on the keeper, press the lever until it clicks.'},
+  {t: 'Release', d: '', cam: 'dock', dur: 6.5,
+   b: 'Open, unhook, slide forward 10 mm, lift off.'}
 ];
 const HOLD = 1.1;
 let acc = 0; for (const s of STEPS) { s.t0 = acc; acc += s.dur; } const TOTAL = acc;
@@ -360,10 +359,10 @@ function applyState(T) {
 /* ---------- labels ---------- */
 const TAGS = [
   {step: 1, text: 'M3 nuts ×2', obj: () => RS.lNuts[1], at: [0, 0, 2.4], after: .5},
-  {step: 2, text: 'Latch 97-30-160-12', obj: () => RS.body, at: [-2, 0, 7], after: .6},
+  {step: 2, text: 'Latch', obj: () => RS.body, at: [-2, 0, 7], after: .6},
   {step: 3, text: 'M3×8 ×2', obj: () => RS.lScrews[1], at: [0, 0, 1.7], after: .4},
-  {step: 4, text: 'M3 nuts ×2 (from the inside)', obj: () => RS.kNuts[1], at: [0, 0, 2.4], after: .5},
-  {step: 5, text: 'Keeper 97-37-103-24', obj: () => RS.keeper, at: [31, 0, 3.6], after: .3},
+  {step: 4, text: 'M3 nuts ×2', obj: () => RS.kNuts[1], at: [0, 0, 2.4], after: .5},
+  {step: 5, text: 'Keeper', obj: () => RS.keeper, at: [31, 0, 3.6], after: .3},
   {step: 5, text: 'M3×6 ×2', obj: () => RS.kScrews[0], at: [0, 0, 1.7], after: .75},
   {step: 6, text: 'Ears into the hooks', obj: () => gA, at: [13, 17, 7], after: .8},
   {step: 7, text: 'Click', obj: () => RS.lever, at: [-12, 0, 4], after: .88, cls: 'click'}
