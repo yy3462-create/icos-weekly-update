@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>ICOS Weekly Update</title>
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 32 32%27%3E%3Cpath d=%27M16 2 29 9.5v13L16 30 3 22.5v-13z%27 fill=%27%230f7a8c%27/%3E%3Cpath d=%27M16 9l7 4v7l-7 4-7-4v-7z%27 fill=%27%23fff%27/%3E%3C/svg%3E">
-<meta name="description" content="ICOS modular legged robot: leg V70 CAD, dock latch assembly and the first PLA print of the quick-release dock.">
+<meta name="description" content="ICOS modular legged robot: the whole robot with V79 legs, and the quick-release dock latch assembly.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
@@ -51,22 +51,16 @@ header .lede{color:var(--ink-2);max-width:66ch;margin-top:10px}
 .cap{display:flex;flex-wrap:wrap;align-items:flex-start;justify-content:space-between;gap:10px 24px;padding:16px 20px 14px;border-bottom:1px solid var(--line-2)}
 .cap h2{font-size:19px;font-weight:600;line-height:1.3}
 .cap p{color:var(--ink-2);font-size:14px;max-width:88ch;margin-top:4px}
-.meta{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
-.meta span{font-family:var(--mono);font-size:11.5px;padding:2px 9px;border-radius:999px;background:var(--ground);border:1px solid var(--line-2);white-space:nowrap}
 .open{font-size:13.5px;white-space:nowrap;text-decoration:none;border:1px solid var(--line);border-radius:6px;padding:6px 12px;color:var(--ink);background:var(--ground)}
 .open:hover{border-color:var(--accent);color:var(--accent)}
-.videobox{background:#0e1113;display:grid;place-items:center}
-video{display:block;width:100%;max-height:78vh;aspect-ratio:16/9;background:#0e1113}
 iframe{display:block;width:100%;border:0;background:var(--ground)}
-#fAssembly{height:1010px} #fLeg{height:1080px}
+#fRobot{height:904px} #fAssembly{height:1090px}
 .next{display:grid;grid-template-columns:auto 1fr;gap:4px 14px;align-items:start;padding:14px 18px;border:1px dashed var(--line);border-radius:10px}
 .next .eyebrow{padding-top:3px}
 .next p{color:var(--ink-2);font-size:14.5px;max-width:110ch}
-footer{font-size:12.5px;color:var(--ink-3)}
 @media (max-width:900px){
   header{grid-template-columns:minmax(0,1fr)}
-  .facts{grid-template-columns:repeat(3,minmax(0,1fr))}
-  #fAssembly{height:880px}
+  #fRobot{height:1500px}
 }
 @media (max-width:520px){ .facts{grid-template-columns:minmax(0,1fr)} .next{grid-template-columns:minmax(0,1fr)} }
 </style>
@@ -75,24 +69,34 @@ footer{font-size:12.5px;color:var(--ink-3)}
 <div class="page">
   <header>
     <div>
-      <p class="eyebrow">ICOS · Weekly update · 24 Sep 2026</p>
-      <h1>Leg V70 and the first printed dock</h1>
-      <p class="lede">V70 fixes how the leg parts fit together. The quick-release dock is printed and fits by hand.</p>
+      <p class="eyebrow">ICOS · Weekly update · 1 Oct 2026</p>
+      <h1>The whole robot with V79 legs</h1>
+      <p class="lede">The legs are 15 mm shorter (85 / 100 mm), the only length that crawled 40 cycles in simulation. The latch animation shows the current dock, zip tie included.</p>
     </div>
     <div class="facts" aria-label="Key numbers">
+      <div class="fact"><b>40</b><span>crawl cycles in the MuJoCo sim, every foot lifting</span></div>
       <div class="fact"><b>0</b><span>collisions in 2197 joint poses</span></div>
-      <div class="fact"><b>0</b><span>collisions with 51 fasteners and 4 legs</span></div>
-      <div class="fact"><b>2</b><span>dock parts printed in PLA</span></div>
+      <div class="fact"><b>716</b><span>parts in the full robot CAD</span></div>
     </div>
   </header>
 
   <nav class="tabs" role="tablist" aria-label="Views">
-    <button class="tab" role="tab" id="tAssembly" aria-controls="pAssembly" aria-selected="true" data-key="assembly"><span class="n">1</span>Latch assembly</button>
-    <button class="tab" role="tab" id="tVideo" aria-controls="pVideo" aria-selected="false" data-key="video"><span class="n">2</span>Printed dock</button>
-    <button class="tab" role="tab" id="tLeg" aria-controls="pLeg" aria-selected="false" data-key="leg"><span class="n">3</span>Leg CAD</button>
+    <button class="tab" role="tab" id="tRobot" aria-controls="pRobot" aria-selected="true" data-key="robot"><span class="n">1</span>Whole robot</button>
+    <button class="tab" role="tab" id="tAssembly" aria-controls="pAssembly" aria-selected="false" data-key="assembly"><span class="n">2</span>Latch assembly</button>
   </nav>
 
-  <section class="panel" role="tabpanel" id="pAssembly" aria-labelledby="tAssembly">
+  <section class="panel" role="tabpanel" id="pRobot" aria-labelledby="tRobot">
+    <div class="cap">
+      <div>
+        <h2>Whole robot, V79 legs</h2>
+        <p>Body and electronics with four legs. Step through the assembly, or drag to rotate.</p>
+      </div>
+      <a class="open" href="robot.html" target="_blank" rel="noopener">Full page ↗</a>
+    </div>
+    <iframe id="fRobot" title="Whole robot CAD with V79 legs, assembly steps" data-src="robot.html?embed" loading="lazy"></iframe>
+  </section>
+
+  <section class="panel" role="tabpanel" id="pAssembly" aria-labelledby="tAssembly" hidden>
     <div class="cap">
       <div>
         <h2>Latch assembly in 9 steps</h2>
@@ -103,49 +107,21 @@ footer{font-size:12.5px;color:var(--ink-3)}
     <iframe id="fAssembly" title="Latch assembly animation" data-src="assembly.html?embed" loading="lazy"></iframe>
   </section>
 
-  <section class="panel" role="tabpanel" id="pVideo" aria-labelledby="tVideo" hidden>
-    <div class="cap">
-      <div>
-        <h2>First PLA print of the dock</h2>
-        <p>Seated by hand. The metal latches are not fitted yet.</p>
-      </div>
-    </div>
-    <div class="videobox">
-      <video id="vid" controls muted loop playsinline preload="metadata" poster="media/print_test_v70_poster.jpg">
-        <source src="media/print_test_v70.mp4" type="video/mp4">
-        <a href="media/print_test_v70.mp4">Download the video (MP4)</a>
-      </video>
-    </div>
-  </section>
-
-  <section class="panel" role="tabpanel" id="pLeg" aria-labelledby="tLeg" hidden>
-    <div class="cap">
-      <div>
-        <h2>Leg V70 next to GPT’s V69</h2>
-        <p>Click an item on the left to see it in 3D.</p>
-      </div>
-      <a class="open" href="leg.html" target="_blank" rel="noopener">Full page ↗</a>
-    </div>
-    <iframe id="fLeg" title="Interactive leg CAD, V70 and V69" data-src="leg.html?embed" loading="lazy"></iframe>
-  </section>
-
   <aside class="next">
     <p class="eyebrow">Next</p>
-    <p>Fit the latches, then 30 dock cycles and a pull test. Docks V71 and V72 are designed and ready to print.</p>
+    <p>Print the V79 parts and the fit coupons, then put one HTD‑45H servo on a test bench. In the simulation the robot walks with servos that bend 1.6° under 1 N·m, and falls at 2.3°.</p>
   </aside>
 
 </div>
 <script>
 (function () {
   const tabs = Array.from(document.querySelectorAll('.tab'));
-  const vid = document.getElementById('vid');
   function show(key, push) {
     tabs.forEach(t => {
       const on = t.dataset.key === key, panel = document.getElementById(t.getAttribute('aria-controls'));
       t.setAttribute('aria-selected', String(on)); panel.hidden = !on;
       if (on) { const f = panel.querySelector('iframe[data-src]'); if (f && !f.getAttribute('src')) f.setAttribute('src', f.dataset.src); }
     });
-    if (key === 'video') { const p = vid.play(); if (p && p.catch) p.catch(() => {}); } else vid.pause();
     if (push) history.replaceState(null, '', '#' + key);
   }
   tabs.forEach(t => t.addEventListener('click', () => show(t.dataset.key, true)));
@@ -154,13 +130,13 @@ footer{font-size:12.5px;color:var(--ink-3)}
     const j = e.key === 'ArrowRight' ? (i + 1) % tabs.length : e.key === 'ArrowLeft' ? (i + tabs.length - 1) % tabs.length : -1;
     if (j >= 0) { e.preventDefault(); tabs[j].focus(); show(tabs[j].dataset.key, true); }
   });
-  // A narrow embedded view reports its natural height (0 = use the default frame height).
+  // An embedded page reports its natural height (0 = use the frame height set above).
   window.addEventListener('message', e => {
     const h = e.data && e.data.icosEmbedHeight; if (typeof h !== 'number' || !isFinite(h)) return;
     document.querySelectorAll('iframe').forEach(f => { if (f.contentWindow === e.source) f.style.height = h > 0 ? Math.min(h, 20000) + 'px' : ''; });
   });
   const start = (location.hash || '').slice(1);
-  show(['assembly', 'video', 'leg'].includes(start) ? start : 'assembly', false);
+  show(['robot', 'assembly'].includes(start) ? start : 'robot', false);
 })();
 </script>
 </body>
