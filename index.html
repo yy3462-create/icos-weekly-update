@@ -5,10 +5,10 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>ICOS Weekly Update</title>
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 32 32%27%3E%3Cpath d=%27M16 2 29 9.5v13L16 30 3 22.5v-13z%27 fill=%27%230f7a8c%27/%3E%3Cpath d=%27M16 9l7 4v7l-7 4-7-4v-7z%27 fill=%27%23fff%27/%3E%3C/svg%3E">
-<meta name="description" content="ICOS modular legged robot: the whole robot with V79 legs, and the quick-release dock latch assembly.">
+<meta name="description" content="ICOS modular legged robot, weekly update of 7 October 2026: the whole robot with V83 legs, the printed quick release, and how the design got there.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap" media="print" onload="this.media='all'">
 <style>
 :root{
   --ground:#eef0ec; --panel:#f8f9f6; --ink:#1c2126; --ink-2:#4b5560; --ink-3:#77818b;
@@ -30,7 +30,7 @@
 html,body{margin:0;background:var(--ground);color:var(--ink)}
 body{font-family:var(--sans);font-size:15px;line-height:1.6;-webkit-text-size-adjust:100%}
 .page{max-width:1440px;margin:0 auto;padding-inline:16px;padding-block:26px 48px;display:flex;flex-direction:column;gap:22px}
-h1,h2,p{margin:0}
+h1,h2,p,ol{margin:0}
 a{color:var(--accent)}
 .eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--accent)}
 header{display:grid;grid-template-columns:minmax(0,1.4fr) minmax(0,1fr);gap:18px 40px;align-items:end;border-bottom:1px solid var(--line);padding-bottom:20px}
@@ -38,7 +38,7 @@ header h1{font-size:clamp(26px,3.4vw,38px);line-height:1.15;font-weight:600;lett
 header .lede{color:var(--ink-2);max-width:66ch;margin-top:10px}
 .facts{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
 .fact{background:var(--panel);border:1px solid var(--line-2);border-radius:8px;padding:10px 12px}
-.fact b{display:block;font-family:var(--mono);font-size:20px;font-weight:500;font-variant-numeric:tabular-nums}
+.fact b{display:block;font-family:var(--mono);font-size:20px;font-weight:500;font-variant-numeric:tabular-nums;white-space:nowrap}
 .fact span{font-size:12.5px;color:var(--ink-2);line-height:1.35;display:block}
 .tabs{display:flex;flex-wrap:wrap;gap:8px}
 .tab{font:inherit;font-size:14.5px;display:inline-flex;align-items:center;gap:10px;padding:9px 16px 9px 12px;border-radius:999px;border:1px solid var(--line);background:var(--panel);color:var(--ink);cursor:pointer}
@@ -54,13 +54,24 @@ header .lede{color:var(--ink-2);max-width:66ch;margin-top:10px}
 .open{font-size:13.5px;white-space:nowrap;text-decoration:none;border:1px solid var(--line);border-radius:6px;padding:6px 12px;color:var(--ink);background:var(--ground)}
 .open:hover{border-color:var(--accent);color:var(--accent)}
 iframe{display:block;width:100%;border:0;background:var(--ground)}
-#fRobot{height:904px} #fAssembly{height:1090px}
-.next{display:grid;grid-template-columns:auto 1fr;gap:4px 14px;align-items:start;padding:14px 18px;border:1px dashed var(--line);border-radius:10px}
+#f-robot{height:904px} #f-release{height:980px} #f-process{height:2400px}
+.sub{display:flex;flex-wrap:wrap;gap:8px 22px;padding:12px 20px 0}
+.grp{display:flex;flex-wrap:wrap;align-items:center;gap:6px 8px}
+.grp .d{font-family:var(--mono);font-size:12px;color:var(--accent);margin-right:2px;white-space:nowrap}
+.chip{font:inherit;font-size:13.5px;padding:5px 12px;border-radius:999px;border:1px solid var(--line);background:var(--ground);color:var(--ink);cursor:pointer}
+.chip:hover{border-color:var(--accent);color:var(--accent)}
+.chip[aria-pressed="true"]{background:var(--accent-soft);border-color:var(--accent);color:var(--ink)}
+.chip:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.subcap{color:var(--ink-2);font-size:14px;padding:10px 20px 12px;border-bottom:1px solid var(--line-2);max-width:none}
+.videobox{padding:16px 20px 20px;background:var(--ground)}
+.videobox video{display:block;width:100%;max-width:960px;max-height:76vh;margin:0 auto;border-radius:8px;background:#000}
+.next{display:grid;grid-template-columns:auto 1fr;gap:4px 18px;align-items:start;padding:14px 18px;border:1px dashed var(--line);border-radius:10px}
 .next .eyebrow{padding-top:3px}
-.next p{color:var(--ink-2);font-size:14.5px;max-width:110ch}
+.next ol{padding-left:1.2em;color:var(--ink-2);font-size:14.5px;max-width:110ch;display:flex;flex-direction:column;gap:3px}
+.next b{color:var(--ink);font-weight:500}
 @media (max-width:900px){
   header{grid-template-columns:minmax(0,1fr)}
-  #fRobot{height:1500px}
+  #f-robot{height:1500px}
 }
 @media (max-width:520px){ .facts{grid-template-columns:minmax(0,1fr)} .next{grid-template-columns:minmax(0,1fr)} }
 </style>
@@ -69,74 +80,135 @@ iframe{display:block;width:100%;border:0;background:var(--ground)}
 <div class="page">
   <header>
     <div>
-      <p class="eyebrow">ICOS · Weekly update · 1 Oct 2026</p>
-      <h1>The whole robot with V79 legs</h1>
-      <p class="lede">The legs are 15 mm shorter (85 / 100 mm), the only length that crawled 40 cycles in simulation. The latch animation shows the current dock, zip tie included.</p>
+      <p class="eyebrow">ICOS · Weekly update · 7 Oct 2026</p>
+      <h1>A printed snap lock replaces the latches</h1>
+      <p class="lede">Since last week the leg dock went through three new versions, plus one proposal that was not built. The current one, V83, holds a leg with two printed spring bolts, and every face of the body carries the same dock. The PLA parts of one leg and one body face are printed; the springs have not arrived, so the lock itself is still untested.</p>
     </div>
     <div class="facts" aria-label="Key numbers">
-      <div class="fact"><b>40</b><span>crawl cycles in the MuJoCo sim, every foot lifting</span></div>
-      <div class="fact"><b>0</b><span>collisions in 2197 joint poses</span></div>
-      <div class="fact"><b>716</b><span>parts in the full robot CAD</span></div>
+      <div class="fact"><b>20 / 20</b><span>faces with the same dock, all passing the CAD fit and release check</span></div>
+      <div class="fact"><b>0</b><span>metal parts in the docks on the body. V81 had 40 keepers and 80 screws</span></div>
+      <div class="fact"><b>3.15 kg</b><span>estimated robot mass with four legs, down from 3.55 kg</span></div>
     </div>
   </header>
 
   <nav class="tabs" role="tablist" aria-label="Views">
-    <button class="tab" role="tab" id="tRobot" aria-controls="pRobot" aria-selected="true" data-key="robot"><span class="n">1</span>Whole robot</button>
-    <button class="tab" role="tab" id="tAssembly" aria-controls="pAssembly" aria-selected="false" data-key="assembly"><span class="n">2</span>Latch assembly</button>
+    <button class="tab" role="tab" id="t-robot" aria-controls="p-robot" aria-selected="true" data-key="robot"><span class="n">1</span>Whole robot</button>
+    <button class="tab" role="tab" id="t-release" aria-controls="p-release" aria-selected="false" data-key="release"><span class="n">2</span>Quick release</button>
+    <button class="tab" role="tab" id="t-process" aria-controls="p-process" aria-selected="false" data-key="process"><span class="n">3</span>Process</button>
+    <button class="tab" role="tab" id="t-earlier" aria-controls="p-earlier" aria-selected="false" data-key="earlier"><span class="n">4</span>Earlier weeks</button>
   </nav>
 
-  <section class="panel" role="tabpanel" id="pRobot" aria-labelledby="tRobot">
+  <section class="panel" role="tabpanel" id="p-robot" aria-labelledby="t-robot">
     <div class="cap">
       <div>
-        <h2>Whole robot, V79 legs</h2>
-        <p>Body and electronics with four legs. Step through the assembly, or drag to rotate.</p>
+        <h2>Whole robot, V83 legs</h2>
+        <p>Body with a dock on every face, electronics, and four legs. Step through the assembly, or drag to rotate.</p>
       </div>
       <a class="open" href="robot.html" target="_blank" rel="noopener">Full page ↗</a>
     </div>
-    <iframe id="fRobot" title="Whole robot CAD with V79 legs, assembly steps" data-src="robot.html?embed" loading="lazy"></iframe>
+    <iframe id="f-robot" title="Whole robot CAD with V83 legs, assembly steps" data-src="robot.html?embed" loading="lazy"></iframe>
   </section>
 
-  <section class="panel" role="tabpanel" id="pAssembly" aria-labelledby="tAssembly" hidden>
+  <section class="panel" role="tabpanel" id="p-release" aria-labelledby="t-release" hidden>
     <div class="cap">
       <div>
-        <h2>Latch assembly in 9 steps</h2>
-        <p>Press Play, or click a step.</p>
+        <h2>How a leg clicks on, and why it stays</h2>
+        <p>12 steps. It plays by itself at 2× speed, in under a minute; click a step or drag to look around.</p>
       </div>
-      <a class="open" href="assembly.html" target="_blank" rel="noopener">Full page ↗</a>
+      <a class="open" href="release.html" target="_blank" rel="noopener">Full page ↗</a>
     </div>
-    <iframe id="fAssembly" title="Latch assembly animation" data-src="assembly.html?embed" loading="lazy"></iframe>
+    <iframe id="f-release" title="How a leg goes on and what holds it, in 12 steps" data-src="release.html?embed" loading="lazy"></iframe>
+  </section>
+
+  <section class="panel" role="tabpanel" id="p-process" aria-labelledby="t-process" hidden>
+    <div class="cap">
+      <div>
+        <h2>From V79 to V83</h2>
+        <p>Why the dock changed, what was checked, what the reviews found, and what the first printed parts showed.</p>
+      </div>
+      <a class="open" href="process.html" target="_blank" rel="noopener">Full page ↗</a>
+    </div>
+    <iframe id="f-process" title="From V79 to V83: versions, checks, reviews and first printed parts" data-src="process.html?embed" loading="lazy"></iframe>
+  </section>
+
+  <section class="panel" role="tabpanel" id="p-earlier" aria-labelledby="t-earlier" hidden>
+    <div class="cap">
+      <div>
+        <h2>Earlier updates</h2>
+        <p>The animations of the earlier updates and the intermediate versions, as they were then. The animations start at 2× speed. Pick one.</p>
+      </div>
+      <a class="open" id="earlierOpen" href="robot_v81.html" target="_blank" rel="noopener">Full page ↗</a>
+    </div>
+    <div class="sub" role="group" aria-label="Earlier pages"><div class="grp"><span class="d">3 Oct</span><button type="button" class="chip" aria-pressed="true" data-cap="V81: the same dock on all 20 faces, the two latches on a beam in front of the foot. Step through the assembly, or use Move a leg to put a leg on another face." data-src="robot_v81.html" data-h="904">Whole robot, V81: dock on all 20 faces</button></div><div class="grp"><span class="d">2 Oct</span><button type="button" class="chip" aria-pressed="false" data-cap="V80: the square receiver is gone; a triangular foot slides under a V rim printed on four faces of the body, held by two draw latches. Step through the assembly, or drag to rotate." data-src="robot_v80.html" data-h="904">Whole robot, V80: triangular dock</button></div><div class="grp"><span class="d">1 Oct</span><button type="button" class="chip" aria-pressed="false" data-cap="The V79 dock of the 1 Oct update: a square receiver with two draw latches and a zip tie. Press Play, or click a step." data-src="assembly.html" data-h="1090">Latch assembly in 9 steps (V79)</button><button type="button" class="chip" aria-pressed="false" data-cap="Body v3 with its electronics and four V79 legs, 13 assembly steps. Step through the assembly, or drag to rotate." data-src="robot_v79.html" data-h="904">Whole robot, V79 legs</button></div><div class="grp"><span class="d">24 Sep</span><button type="button" class="chip" aria-pressed="false" data-cap="The V70 dock of the 24 Sep update, the first latch design. Press Play, or click a step." data-src="assembly_v70.html" data-h="1010" data-hn="880">Latch assembly (V70)</button><button type="button" class="chip" aria-pressed="false" data-cap="First PLA print of the V70 dock, seated by hand. The metal latches were not fitted yet." data-video="1">First printed dock (video)</button><button type="button" class="chip" aria-pressed="false" data-cap="Leg V70 next to GPT’s V69: V70 keeps the shape and fixes how the parts connect. Click an item on the left to see it in 3D." data-src="leg.html" data-h="1080">Leg CAD, V70 next to V69</button></div></div>
+    <p class="subcap" id="earlierCap">V81: the same dock on all 20 faces, the two latches on a beam in front of the foot. Step through the assembly, or use Move a leg to put a leg on another face.</p>
+    <iframe id="f-earlier" title="An earlier page of the weekly update" loading="lazy"></iframe>
+    <div class="videobox" id="earlierVideo" hidden>
+      <video controls muted loop playsinline preload="none" poster="media/print_test_v70_poster.jpg">
+        <source src="media/print_test_v70.mp4" type="video/mp4">
+        <a href="media/print_test_v70.mp4">Download the video (MP4)</a>
+      </video>
+    </div>
   </section>
 
   <aside class="next">
     <p class="eyebrow">Next</p>
-    <p>Print the V79 parts and the fit coupons, then put one HTD‑45H servo on a test bench. In the simulation the robot walks with servos that bend 1.6° under 1 N·m, and falls at 2.3°.</p>
+    <ol>
+      <li><b>Springs:</b> screen them in the printed gauge, then try the lock on the single printed face: click-out, pull test, one paddle pressed, 30 times on and off.</li>
+      <li><b>Bearings:</b> press the two 6806 into the tower and see how tight the crush ribs come out on this printer.</li>
+      <li><b>Body:</b> print the tilted test face in the body material before the body itself, the longest print.</li>
+      <li><b>Servo:</b> put one HTD‑45H on a bench. The simulation assumes a servo deflects 1.6° under 1 N·m.</li>
+    </ol>
   </aside>
 
 </div>
 <script>
 (function () {
-  const tabs = Array.from(document.querySelectorAll('.tab'));
-  function show(key, push) {
+  const tabs = Array.from(document.querySelectorAll('.tab')), keys = tabs.map(t => t.dataset.key);
+  const chips = Array.from(document.querySelectorAll('.chip')), ef = document.getElementById('f-earlier'), ev = document.getElementById('earlierVideo'), narrow = matchMedia('(max-width:900px)');
+  let earlierLoaded = false;
+  const defH = f => f.dataset.h ? ((narrow.matches && f.dataset.hn) ? f.dataset.hn : f.dataset.h) + 'px' : '';
+  function pick(c) {
+    earlierLoaded = true;
+    chips.forEach(x => x.setAttribute('aria-pressed', String(x === c)));
+    document.getElementById('earlierCap').textContent = c.dataset.cap;
+    const open = document.getElementById('earlierOpen'), vid = ev.querySelector('video');
+    if (c.dataset.video) {
+      ef.hidden = true; ev.hidden = false; open.href = 'media/print_test_v70.mp4';
+    } else {
+      if (vid) vid.pause(); ev.hidden = true; ef.hidden = false; open.href = c.dataset.src;
+      ef.dataset.h = c.dataset.h || ''; ef.dataset.hn = c.dataset.hn || ''; ef.style.height = defH(ef);
+      if (ef.getAttribute('src') !== c.dataset.src + '?embed') ef.setAttribute('src', c.dataset.src + '?embed');
+    }
+  }
+  chips.forEach(c => c.addEventListener('click', () => { pick(c); history.replaceState(null, '', '#earlier=' + (c.dataset.src ? c.dataset.src.replace(/\.html$/, '') : 'video')); }));
+  const chipFor = sub => chips.find(c => sub && (c.dataset.src ? c.dataset.src.replace(/\.html$/, '') === sub : sub === 'video'));
+  function show(key, push, sub) {
     tabs.forEach(t => {
       const on = t.dataset.key === key, panel = document.getElementById(t.getAttribute('aria-controls'));
-      t.setAttribute('aria-selected', String(on)); panel.hidden = !on;
+      t.setAttribute('aria-selected', String(on)); t.tabIndex = on ? 0 : -1; panel.hidden = !on;
       if (on) { const f = panel.querySelector('iframe[data-src]'); if (f && !f.getAttribute('src')) f.setAttribute('src', f.dataset.src); }
+      if (on && key === 'earlier' && (sub || !earlierLoaded)) pick(chipFor(sub) || chips.find(c => c.getAttribute('aria-pressed') === 'true') || chips[0]);
     });
     if (push) history.replaceState(null, '', '#' + key);
   }
+  const fromHash = () => { const [k, sub] = decodeURIComponent((location.hash || '').slice(1)).split('='); return keys.includes(k) ? {k, sub} : null; };
   tabs.forEach(t => t.addEventListener('click', () => show(t.dataset.key, true)));
   document.querySelector('.tabs').addEventListener('keydown', e => {
     const i = tabs.indexOf(document.activeElement); if (i < 0) return;
     const j = e.key === 'ArrowRight' ? (i + 1) % tabs.length : e.key === 'ArrowLeft' ? (i + tabs.length - 1) % tabs.length : -1;
     if (j >= 0) { e.preventDefault(); tabs[j].focus(); show(tabs[j].dataset.key, true); }
   });
-  // An embedded page reports its natural height (0 = use the frame height set above).
+  // A link inside an embedded page can name a tab (index.html#release, target _top): follow the hash.
+  window.addEventListener('hashchange', () => { const h = fromHash(); if (h) { show(h.k, false, h.sub); document.querySelector('.tabs').scrollIntoView({block: 'start'}); } });
+  // An embedded page reports its natural height (0 = use the height set on the frame), and may ask to be scrolled to one of its sections.
+  const frames = Array.from(document.querySelectorAll('iframe'));
   window.addEventListener('message', e => {
-    const h = e.data && e.data.icosEmbedHeight; if (typeof h !== 'number' || !isFinite(h)) return;
-    document.querySelectorAll('iframe').forEach(f => { if (f.contentWindow === e.source) f.style.height = h > 0 ? Math.min(h, 20000) + 'px' : ''; });
+    const d = e.data; if (!d || typeof d !== 'object') return;
+    const f = frames.find(x => x.contentWindow === e.source); if (!f) return;
+    if (typeof d.icosEmbedHeight === 'number' && isFinite(d.icosEmbedHeight)) f.style.height = d.icosEmbedHeight > 0 ? Math.min(d.icosEmbedHeight, 30000) + 'px' : defH(f);
+    if (typeof d.icosScrollTo === 'number' && isFinite(d.icosScrollTo)) window.scrollTo(0, f.getBoundingClientRect().top + window.scrollY + d.icosScrollTo - 10);
   });
-  const start = (location.hash || '').slice(1);
-  show(['robot', 'assembly'].includes(start) ? start : 'robot', false);
+  const h0 = fromHash(); show(h0 ? h0.k : 'robot', false, h0 && h0.sub);
 })();
 </script>
 </body>

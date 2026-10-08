@@ -133,9 +133,9 @@ header p{margin:6px 0 0;color:var(--ink-2);max-width:70ch}
       </div>
       <select id="speed" aria-label="Playback speed">
         <option value="0.5">0.5×</option>
-        <option value="1" selected>1×</option>
+        <option value="1">1×</option>
         <option value="1.5">1.5×</option>
-        <option value="2">2×</option>
+        <option value="2" selected>2×</option>
       </select>
       <span class="seglabel">Printed parts</span>
       <span class="seg" role="group" aria-label="Printed part colour">
@@ -493,7 +493,7 @@ canvas.addEventListener('contextmenu', e => e.preventDefault());
 canvas.addEventListener('wheel', e => { e.preventDefault(); tw = null; userCam = true; cam.r = Math.max(40, Math.min(1000, cam.r * Math.exp(e.deltaY * .0012))); updateCam(); }, {passive: false});
 
 /* ---------- UI ---------- */
-let T = 0, playing = !REDUCE, speed = 1, lastStep = -1, scrubbing = false, dirty = true, instantCam = false;
+let T = 0, playing = !REDUCE, speed = 2, lastStep = -1, scrubbing = false, dirty = true, instantCam = false;
 let camKey = '';
 const list = $('#steps');
 STEPS.forEach((s, i) => {
