@@ -80,7 +80,7 @@ function setup3D(){
  holdArrow=new THREE.ArrowHelper(new THREE.Vector3(-1,0,0),new THREE.Vector3(44,-17,14),12,0x087f82,3,1.8);scene.add(holdArrow);
  new ResizeObserver(resize).observe(stageEl);resize();
 }
-function resize(){if(!renderer)return;const w=stageEl.clientWidth,h=stageEl.clientHeight;renderer.setSize(w,h,false);camera.aspect=w/h;camera.updateProjectionMatrix();}
+function resize(){if(!renderer)return;const w=stageEl.clientWidth,h=stageEl.clientHeight;renderer.setSize(w,h,false);camera.aspect=w/h;camera.updateProjectionMatrix();apply(time);}
 function stateAt(t){
  let index=stages.findIndex((s,i)=>t>=s.start&&(t<s.start+s.duration||i===stages.length-1));if(index<0)index=0;
  const u=clamp((t-stages[index].start)/stages[index].duration);let e=34,installed=false,screwOffset=-19,screwShow=false,springSeated=false,springX0=13,springX1=38,left=false,leftE=0,leftScrew=false,leftOffset=0,held=false,turn=0;
