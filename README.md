@@ -14,3 +14,10 @@ Interactive weekly update for the ICOS modular legged robot. Open `index.html` (
 Everything is static HTML. The 3D views use three.js r128 (`vendor/three.r128.min.js`, MIT licence). Links like `index.html#release` or `index.html#earlier=robot_v80` open a tab directly.
 
 To update: replace the files on github.com (*Add file → Upload files*), then *Commit changes*. Pages rebuilds in about a minute.
+
+
+## V83 spring-bolt assembly guide (19 October 2026)
+
+- `assembly-v83-spring-bolt/`: focused spring / sliding bolt / M2×6 stop-screw assembly animation.
+- Includes a 54-second GIF and a standalone offline ZIP. The two existing tray assembly pages are unchanged.
+- CAD meshes and nominal dimensions illustrate the assembly; this is not physical fit or durability qualification.
